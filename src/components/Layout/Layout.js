@@ -1,9 +1,9 @@
 import Aux from '../../HOC/Aux'
-
+import './layout.css';
 const Layout = (props) => (
     <Aux>
         <div>toolbar, sidebar, backdrop</div>
-        <main>
+        <main className="content">
             {props.children}
         </main>
     </Aux>
