@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import Layout from './components/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import BuildControls from './components/Burger/buildControls/BuildControls';
+
 
 class App extends Component {
   
@@ -10,7 +10,7 @@ class App extends Component {
     <div>
       <Layout>
           <BurgerBuilder/>
-          <BuildControls/>
+          
       </Layout>
     </div>
   );}
