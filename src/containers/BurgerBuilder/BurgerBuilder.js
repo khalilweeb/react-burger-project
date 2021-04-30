@@ -20,8 +20,23 @@ class BurgerBuilder extends Component {
             cheese: 0,
             bacon: 0
         },
-        price: 3 
+        price: 3,
+        purchaseble: true
     };
+
+
+    updatePurshaseHandler = (price) => {
+        if(price <= 3) {
+            this.setState({purchaseble: true});
+            
+        } else {
+            this.setState({purchaseble: false});
+          
+            
+        }
+        return this.state.purchaseble;
+    }
+    
     
     addIngredientsHandler(type){
         //adding ingredient to the copied state
@@ -32,12 +47,13 @@ class BurgerBuilder extends Component {
         const updatedIngredients =  {...this.state.ingredients};
         updatedIngredients[type] = addcount;
         //calculating the price
+       
         const oldPrice = this.state.price;
         const priceaddintion = PRICES[type];
         const totalPrice = priceaddintion + oldPrice; 
 
         this.setState({price: totalPrice ,  ingredients: updatedIngredients });
-
+        this.updatePurshaseHandler(totalPrice)
 
        }
        removeIngredientsHandler(type){
@@ -52,15 +68,16 @@ class BurgerBuilder extends Component {
         const updatedIngredients =  {...this.state.ingredients};
         updatedIngredients[type] = addcount;
         //calculating the price
+        
         const oldPrice = this.state.price;
         const priceaddintion = PRICES[type];
-        const totalPrice = priceaddintion - oldPrice; 
+        const totalPrice =   oldPrice - priceaddintion; 
 
         this.setState({price: totalPrice ,  ingredients: updatedIngredients });
-
-
+        this.updatePurshaseHandler(totalPrice)
+       
        }
-
+     
     render() {
         let disabledInfo = {
             ...this.state.ingredients
@@ -68,6 +85,7 @@ class BurgerBuilder extends Component {
         for(let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
+       
         return (
             <Aux>   
                 <Burger ingredients={this.state.ingredients}/>
@@ -75,7 +93,8 @@ class BurgerBuilder extends Component {
                 price={this.state.price}
                 more={ this.addIngredientsHandler.bind(this)} 
                 less={ this.removeIngredientsHandler.bind(this)} 
-                disabled={disabledInfo}/>
+                disabled={disabledInfo}
+                orderdisable={this.state.purchaseble}/>
                 
             </Aux>
             
