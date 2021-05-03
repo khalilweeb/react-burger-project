@@ -2,6 +2,8 @@ import React , {Component} from 'react';
 import Aux from '../../HOC/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/buildControls/BuildControls';
+import Modal from '../../components/UI/model/Model';
+import OrderSummary from '../../components/ordersummery/Ordersummery';
 
 const PRICES = {
     salad: 0.5,
@@ -21,7 +23,8 @@ class BurgerBuilder extends Component {
             bacon: 0
         },
         price: 3,
-        purchaseble: true
+        purchaseble: true,
+        purchasing : false
     };
 
 
@@ -77,6 +80,15 @@ class BurgerBuilder extends Component {
         this.updatePurshaseHandler(totalPrice)
        
        }
+       purchaseHandler = () =>{
+           this.setState({purchasing: true})
+       }
+       hideBackdropHandler = () => {
+        this.setState({purchasing: false})
+       }
+       purchaseContinueHandler = () => {
+           alert('You can\'t contunie in this opperation');
+       }
      
     render() {
         let disabledInfo = {
@@ -87,14 +99,22 @@ class BurgerBuilder extends Component {
         }
        
         return (
-            <Aux>   
+            <Aux>  
+                <Modal show={this.state.purchasing} clicked={this.hideBackdropHandler}>
+                    <OrderSummary 
+                    price={this.state.price.toFixed(2)}
+                    ingredients={this.state.ingredients} 
+                    cancel={this.hideBackdropHandler} 
+                    continue={this.purchaseContinueHandler}/>
+                </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls 
                 price={this.state.price}
                 more={ this.addIngredientsHandler.bind(this)} 
                 less={ this.removeIngredientsHandler.bind(this)} 
                 disabled={disabledInfo}
-                orderdisable={this.state.purchaseble}/>
+                orderdisable={this.state.purchaseble}
+                ordered={this.purchaseHandler}/>
                 
             </Aux>
             

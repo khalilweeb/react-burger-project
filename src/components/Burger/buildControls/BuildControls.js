@@ -21,7 +21,10 @@ const buildcontrol = [
                 less={() => props.less(ctrl.type)} disabled={props.disabled[ctrl.type]}/>
     })
     }
-    <button className='OrderButton' disabled={props.orderdisable}>Order now</button>
+    <button 
+    className='OrderButton' 
+    disabled={props.orderdisable}
+    onClick={props.ordered}>Order now</button>
         </div>
     )
 }
