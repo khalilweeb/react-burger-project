@@ -1,0 +1,27 @@
+.Sidedraw {
+    position: fixed;
+    width: 280px;
+    max-width: 70%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    background: #fff;
+    padding: 32px 16px;
+    box-sizing: border-box;
+    transition: all .8s ease;
+}
+
+@media (min-width:500px) {
+    .Sidedraw {
+        display: none;
+    }
+}
+
+.open {
+    transform: translateX(0);
+}
+
+.close {
+    transform: translateX(-100%);
+}
