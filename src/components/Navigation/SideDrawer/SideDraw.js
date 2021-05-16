@@ -1,4 +1,3 @@
-import react from 'react';
 import Logo from '../Logo/Logo';
 import Navigation from '../navigation';
 import './sidedraw.css';
